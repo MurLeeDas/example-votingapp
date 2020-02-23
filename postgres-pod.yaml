@@ -1,22 +1,26 @@
---- 
-added: ~
-apiVersion: v1
-env: 
-  - 
-    name: POSTGRES_HOST_AUTH_METHOD
-    value: trust
-kind: Pod
-metadata: 
-  labels: 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
     app: demo-voting-app
-    name: postgres-pod
-  name: postgres-pod
-spec: 
-  containers: 
-    - 
-      image: "postgres:9.6"
-      name: postgres
-      ports: 
-        - 
-          containerPort: 5432
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres-pod
+      app: demo-voting-app
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        name: postgres-pod
+        app: demo-voting-app
+
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:9.4
+        ports:
+        - containerPort: 5432
 
