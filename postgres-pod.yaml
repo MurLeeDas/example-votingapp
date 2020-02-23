@@ -12,7 +12,7 @@ spec:
       image: postgres:9.6
       ports:
         - containerPort: 5432
-       
+added:       
 env:
   - name: POSTGRES_HOST_AUTH_METHOD
     value: "trust"
